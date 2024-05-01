@@ -10,21 +10,22 @@ seedc = 42;
 p = 0;
 m = 0;
 
-% p^m=q with p prime has to be determined. We iterate over all p prime
-for base = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97] % all prime numbers <100
-    exp = log(q)/log(base);
-    if mod(exp, 1) < 1e-9
-        p = round(base);
-        m = round(exp);
-        break;
-    end
-    % If no p^m=q is found p is set to 2
-    if base == 97
-        m = ceil(log2(q));
-        p = 2;
-    end
-end
+% % p^m=q with p prime has to be determined. We iterate over all p prime
+% for base = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97] % all prime numbers <100
+%     exp = log(q)/log(base);
+%     if mod(exp, 1) < 1e-9
+%         p = round(base);
+%         m = round(exp);
+%         break;
+%     end
+%     % If no p^m=q is found p is set to 2
+%     if base == 97
+%         m = ceil(log2(q));
+%         p = 2;
+%     end
+% end
 
+p = ceil(log2(q)); 
 n = p^m - 1; % Code block length
 k = n-d+1; % Message length
 
