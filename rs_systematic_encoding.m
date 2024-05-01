@@ -26,4 +26,21 @@ encoded_word = conv(a, g); %this way it will be non-systematic
 %systematic encoding a(x)*x^(n-k)
 a = [a zeros(1, n - k)];
 [quot, rem] = deconv(a, g);
-syst_a = a+rem  
+encoded_word = a+rem;
+disp('Encoded word:')
+disp(encoded_word.x)
+
+% Adding errors to the encoded word
+seed = 42;
+rng(seed); 
+N = 1; % add 1 error
+error_idx = randperm(n, N);
+error_val = gf(randi([1 q-1], N, 1), m, g.prim_poly);
+disp(['Error to be added in position ', num2str(error_idx), ': ', num2str(error_val.x)]);
+errorVector = gf(zeros(1, n), m, g.prim_poly);
+errorVector(error_idx) = error_val;
+noisyEncodedWord = encoded_word + errorVector;
+
+
+disp('Noisy Encoded Word:');
+disp(noisyEncodedWord.x);
